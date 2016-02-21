@@ -1,0 +1,4 @@
+1，首先，新建一个Module，再读取“tourism.ttl”。
+2，获取Module的StmtIterator, 新建一个list<Statement>, 遍历每句Statement。
+	当Statement的subject不是“Museion”, 和object不是“ChickenHut”时，把Statement加入到list。
+3，把list从Module里删除掉。再把Module输出到“new-triples.ttl”。

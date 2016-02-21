@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+
+
+<html>
+  <head>
+    <title>Semantic Web Technologies 2015 Lab</title>
+  </head>
+
+<body>
+<h2>Semantic Web Technologies 2015 Lab</h2>
+	      
+<h3>Use Ontop from Command Line Interface for R2RML with the Books example</h3>
+
+<ol>
+  <li>Start a database server. In this lab, we use a pre-bundled h2 database.
+<p>
+	On Mac or Linux:
+	<pre>
+	  $ ./h2.sh 
+	</pre>
+
+	On Windows:
+	<pre>
+	  h2.bat  
+	</pre>
+	
+	A window will popup from the Web browser. You can login as follows:
+    
+    The password is `rioyxlgt' (without quote)
+
+<p>
+  <center>	<img src="h2-login.png"/></center>
+
+	</p>
+  </li>
+
+  The relational schema of the <code>books</code> database is as follows:
+    <p/><center><img src="books-schema.png"/></center><p/>
+  
+	<p>
+	NOTE:  If you installed your own database
+    server, create a <code>books</code> database and populate it using the SQL
+    scripts
+    from <a href="https://github.com/ontop/ontop/wiki/InstallingTutorialDatabases">here</a>.
+    Refer
+    to <a href="https://github.com/ontop/ontop/wiki/ontopOBDAModel">this
+    page</a> for more information on how to configure a data source (you will
+    need a different <code>Connection URL</code> and a different <code>Driver
+      class</code> for database systems different from Postgres).
+
+  </li>
+
+<li>
+    Download ontop from <a href="https://sourceforge.net/projects/ontop4obda/files/ontop-1.15/">Sourceforge</a>. Choose <code>ontop-distribution-1.15.0.zip</code>
+</li>
+
+<li> Run ontop from command line. You may need to adjust the paths of the files
+<code><pre>
+    $ ~/opt/ontop-1.15/ontop materialize -l jdbc:h2:tcp://localhost/./../data/books -m exampleBooks.ttl -u sa -p rioyxlgt -d org.h2.Driver -f turtle -o materializedBooks.ttl
+</pre></code>
+</li>
+
+<li>
+    Modify the R2RML mapping to better understand how Ontop/R2RML works.
+</li>
+
+<li> We can also use Ontop for DirectMapping. There are three steps:
+    <ol>
+        <li>Generate a mapping file simulating the DirectMapping<br/>
+        <code></pre>
+            $ ~/opt/ontop-1.15/ontop  bootstrap -b http://example.org/ -l jdbc:h2:tcp://localhost/./../data/books -u sa -p rioyxlgt -d org.h2.Driver -t bootstrapped-book.owl -m bootstrapped-book.obda
+        </pre><code>
+        </li>
+        <li>
+            Optionally, you can convert the file `bootstrapped-book.obda` to R2RML<br/>
+            <code></pre>
+            $ ~/opt/ontop-1.15/ontop   mapping to-r2rml -i bootstrapped-book.obda   -o bootstrapped-book.ttl
+            </pre><code>
+        </li>
+        <li> Generate triples using the bootstrapped mappings.<br/>
+            <code></pre>            
+             ~/opt/ontop-1.15/ontop materialize -l jdbc:h2:tcp://localhost/./../data/books -m bootstrapped-book.ttl -u sa -p rioyxlgt -d org.h2.Driver -f turtle -o bootstrapped-book-triples.ttl
+            </pre><code>
+        </li>
+    </ol>
+</li>
+</ol>
+
+
+You can find various information about Ontop on the
+<a href="http://ontop.inf.unibz.it/">official website</a>. A tutorial on
+books from the developers can be found
+<a href="https://github.com/ontop/ontop/wiki/BookTutorial">here</a>.
+You
+can also have a look at another
+tutorial <a href="https://www.dropbox.com/sh/q3aowgiq5dnco7n/as0QniGPKy">here</a>.
+
+<h3>Useful Links</h3>
+<ol>
+  <li><a href="https://github.com/ontop/ontop/wiki">Ontop wiki</a>
+  </li>
+  <li><a href="https://github.com/ontop/ontop/wiki/MappingDesignTips">Mapping
+      Design Tips</a>
+  </li>
+  <li><a href="https://github.com/ontop/ontop/wiki/Ontopmaven">Using ontop as
+      Maven dependency</a>
+  </li>
+  <li><a href="https://github.com/ontop/ontop/wiki/ObdalibRdb2rdf">Using R2RML
+      with ontop</a>
+  </li>
+  <li><a href="http://www.semantic-web-journal.net/content/ontop-answering-sparql-queries-over-relational-databases">Ontop:
+      Answering SPARQL Queries over Relational Databases</a> (Paper currently
+    under review)</li>
+</ol>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+@base <http://example.org/> .
+@prefix foaf: <http://xmlns.com/foaf/spec/> .
+
+<#I>
+	foaf:title "Mr." ;
+	foaf:firstName "Yihan" ;
+	foaf:lastName "Lin" ;
+	foaf:email "1032612468@qq.com" ;
+	foaf:homepage "http://heheda.com" ;
+	foaf:photo "http://example.org/1.png" ;
+	foaf:phone 82603261 ;
+	foaf:knows [
+		foaf:firstName "honghong" ;
+		foaf:gender "male" ;
+		foaf:age 22] ;
+	foaf:knows [
+		foaf:firstName "Huibin" ;
+		foaf:gender "female" ;
+		foaf:age 21] ;
+	foaf:favorFoodIs "apple" ;
+	foaf:favorMovieIs "Final Fantasy" ;
+	foaf:age 21 ;
+	foaf:birthday "05-06" ;
+	foaf:gender "male" .

@@ -1,0 +1,64 @@
+Query 01:
+
+PREFIX foaf: <http://xmlns.com/foaf/spec/>
+
+SELECT ?name
+WHERE {
+	?v foaf:age 21;
+		foaf:firstName ?name.
+}
+ORDER BY ?age
+
+Result 01:
+	name
+1	"Huibin"
+2	"Yihan"
+3	"honghong"
+
+Query 02:
+
+PREFIX foaf: <http://xmlns.com/foaf/spec/>
+
+SELECT ?gender
+WHERE {
+	_:x foaf:age 21;
+		foaf:knows [foaf:gender ?gender].
+}
+
+Result 02:
+	gender
+1	"male"
+2	"female"
+
+Query 03:
+
+PREFIX foaf: <http://xmlns.com/foaf/spec/>
+
+SELECT ?firstName ?lastName
+WHERE {
+	?v foaf:firstName ?firstName.
+	OPTIONAL {?v foaf:lastName ?lastName}
+}
+
+Result 03:
+	firstName	lastName
+1	"Yihan"		"Lin"
+2	"Huibin"
+3	"honghong"
+
+Query 04:
+
+PREFIX foaf: <http://xmlns.com/foaf/spec/>
+
+SELECT DISTINCT ?firstName
+WHERE {
+	?v foaf:firstName ?firstName.
+	{?v foaf:knows ?other}
+	UNION
+	{?v foaf:gender "male"}
+}
+
+Result 04:
+	firstName
+1	"Yihan"
+2	"honghong"

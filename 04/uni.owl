@@ -1,0 +1,334 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY uni "http://ex.org/uni#" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.example.org/book#"
+     xml:base="http://www.example.org/book"
+     xmlns:uni="http://ex.org/uni#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.example.org/book"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://ex.org/uni#author -->
+
+    <owl:ObjectProperty rdf:about="&uni;author"/>
+    
+
+
+    <!-- http://ex.org/uni#examinerOf -->
+
+    <owl:ObjectProperty rdf:about="&uni;examinerOf">
+        <owl:inverseOf rdf:resource="&uni;hasExaminer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ex.org/uni#hasAffiliation -->
+
+    <owl:ObjectProperty rdf:about="&uni;hasAffiliation">
+        <rdfs:range rdf:resource="&uni;Organization"/>
+        <rdfs:domain rdf:resource="&uni;Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ex.org/uni#hasColleague -->
+
+    <owl:ObjectProperty rdf:about="&uni;hasColleague">
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ex.org/uni#hasExaminer -->
+
+    <owl:ObjectProperty rdf:about="&uni;hasExaminer">
+        <rdfs:subPropertyOf rdf:resource="&uni;hasParticipant"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://ex.org/uni#hasParticipant -->
+
+    <owl:ObjectProperty rdf:about="&uni;hasParticipant"/>
+    
+
+
+    <!-- http://ex.org/uni#hasProjectLeader -->
+
+    <owl:ObjectProperty rdf:about="&uni;hasProjectLeader">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://ex.org/uni#firstName -->
+
+    <owl:DatatypeProperty rdf:about="&uni;firstName">
+        <rdfs:domain rdf:resource="&uni;Person"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://ex.org/uni#ActivelyTeaching -->
+
+    <owl:Class rdf:about="&uni;ActivelyTeaching"/>
+    
+
+
+    <!-- http://ex.org/uni#Book -->
+
+    <owl:Class rdf:about="&uni;Book">
+        <owl:equivalentClass rdf:resource="&uni;Publication"/>
+    </owl:Class>
+    
+
+
+    <!-- http://ex.org/uni#Exam -->
+
+    <owl:Class rdf:about="&uni;Exam">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&uni;hasExaminer"/>
+                <owl:onClass rdf:resource="&uni;Person"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&uni;hasExaminer"/>
+                <owl:onClass rdf:resource="&uni;Person"/>
+                <owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&uni;hasExaminer"/>
+                <owl:someValuesFrom rdf:resource="&uni;Person"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&uni;hasExaminer"/>
+                <owl:allValuesFrom rdf:resource="&uni;Professor"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://ex.org/uni#ExamRicci -->
+
+    <owl:Class rdf:about="&uni;ExamRicci">
+        <rdfs:subClassOf rdf:resource="&uni;Exam"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&uni;hasExaminer"/>
+                <owl:hasValue rdf:resource="&uni;francescoRicci"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://ex.org/uni#FacultyMember -->
+
+    <owl:Class rdf:about="&uni;FacultyMember">
+        <rdfs:subClassOf rdf:resource="&uni;Person"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:complementOf rdf:resource="&uni;Publication"/>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://ex.org/uni#Human -->
+
+    <owl:Class rdf:about="&uni;Human">
+        <owl:equivalentClass rdf:resource="&uni;Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://ex.org/uni#Organization -->
+
+    <owl:Class rdf:about="&uni;Organization"/>
+    
+
+
+    <!-- http://ex.org/uni#Person -->
+
+    <owl:Class rdf:about="&uni;Person"/>
+    
+
+
+    <!-- http://ex.org/uni#Professor -->
+
+    <owl:Class rdf:about="&uni;Professor">
+        <rdfs:subClassOf rdf:resource="&uni;FacultyMember"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&uni;ActivelyTeaching"/>
+                    <rdf:Description rdf:about="&uni;Retired"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://ex.org/uni#Publication -->
+
+    <owl:Class rdf:about="&uni;Publication"/>
+    
+
+
+    <!-- http://ex.org/uni#Retired -->
+
+    <owl:Class rdf:about="&uni;Retired"/>
+    
+
+
+    <!-- http://ex.org/uni#StaffOfCS -->
+
+    <owl:Class rdf:about="&uni;StaffOfCS"/>
+    
+
+
+    <!-- http://ex.org/uni#Technician -->
+
+    <owl:Class rdf:about="&uni;Technician"/>
+    
+
+
+    <!-- http://ex.org/uni#TechnicianOfCS -->
+
+    <owl:Class rdf:about="&uni;TechnicianOfCS">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&uni;StaffOfCS"/>
+                    <rdf:Description rdf:about="&uni;Technician"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://ex.org/uni#facultyCS -->
+
+    <owl:NamedIndividual rdf:about="&uni;facultyCS"/>
+    
+
+
+    <!-- http://ex.org/uni#francescoRicci -->
+
+    <owl:NamedIndividual rdf:about="&uni;francescoRicci">
+        <rdf:type rdf:resource="&uni;Professor"/>
+        <uni:firstName rdf:datatype="&xsd;string">Francesco</uni:firstName>
+        <uni:hasAffiliation rdf:resource="&uni;facultyCS"/>
+        <uni:hasAffiliation rdf:resource="&uni;unibz"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://ex.org/uni#markusKroetzsch -->
+
+    <owl:NamedIndividual rdf:about="&uni;markusKroetzsch"/>
+    
+
+
+    <!-- http://ex.org/uni#pascalHitzler -->
+
+    <owl:NamedIndividual rdf:about="&uni;pascalHitzler"/>
+    
+
+
+    <!-- http://ex.org/uni#sebastianRudolph -->
+
+    <owl:NamedIndividual rdf:about="&uni;sebastianRudolph"/>
+    
+
+
+    <!-- http://ex.org/uni#semantic-web-book -->
+
+    <owl:NamedIndividual rdf:about="&uni;semantic-web-book">
+        <rdf:type rdf:resource="&uni;Book"/>
+        <uni:author rdf:resource="&uni;markusKroetzsch"/>
+        <uni:author rdf:resource="&uni;pascalHitzler"/>
+        <uni:author rdf:resource="&uni;sebastianRudolph"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://ex.org/uni#unibz -->
+
+    <owl:NamedIndividual rdf:about="&uni;unibz"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.5.1) http://owlapi.sourceforge.net -->
+

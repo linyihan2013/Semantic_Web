@@ -1,0 +1,36 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#"
+    xmlns:foaf="http://xmlns.com/foaf/spec/" > 
+  <rdf:Description rdf:about="http://example.org/resource/Yingjie">
+    <vcard:Family>Wang</vcard:Family>
+    <vcard:Given>Yingjie</vcard:Given>
+    <vcard:NICKNAME>Wingy</vcard:NICKNAME>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A0">
+    <foaf:age rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">22</foaf:age>
+    <foaf:gender>male</foaf:gender>
+    <foaf:firstName>honghong</foaf:firstName>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/#I">
+    <foaf:title>Mr.</foaf:title>
+    <foaf:photo>http://example.org/1.png</foaf:photo>
+    <foaf:favorMovieIs>Final Fantasy</foaf:favorMovieIs>
+    <foaf:firstName>Yihan</foaf:firstName>
+    <foaf:favorFoodIs>apple</foaf:favorFoodIs>
+    <foaf:email>1032612468@qq.com</foaf:email>
+    <foaf:lastName>Lin</foaf:lastName>
+    <foaf:phone rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">82603261</foaf:phone>
+    <foaf:birthday>05-06</foaf:birthday>
+    <foaf:gender>male</foaf:gender>
+    <foaf:homepage>http://heheda.com</foaf:homepage>
+    <foaf:knows rdf:nodeID="A1"/>
+    <foaf:age rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">21</foaf:age>
+    <foaf:knows rdf:nodeID="A0"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A1">
+    <foaf:age rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">21</foaf:age>
+    <foaf:gender>female</foaf:gender>
+    <foaf:firstName>Huibin</foaf:firstName>
+  </rdf:Description>
+</rdf:RDF>
